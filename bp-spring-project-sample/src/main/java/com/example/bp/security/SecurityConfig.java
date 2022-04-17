@@ -2,7 +2,6 @@ package com.example.bp.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,11 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         new CustomAuthenticationFilter(authenticationManagerBean());
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//  http.authorizeHttpRequests().anyRequest().permitAll();
+//    http.authorizeHttpRequests().anyRequest().permitAll();
     http.authorizeHttpRequests().antMatchers("/login/**", "/token/refresh/**", "/h2-console/**")
         .permitAll();
-    http.authorizeHttpRequests().antMatchers("/users/**")
-        .hasAnyRole("ADMIN", "USER");
+    http.authorizeHttpRequests().antMatchers("/users/**").hasAnyRole("ADMIN", "USER");
     http.authorizeHttpRequests().anyRequest().authenticated();
     http.addFilter(customAuthenticationFilter);
     http.addFilterBefore(new CustomerAuthorizationFilter(),

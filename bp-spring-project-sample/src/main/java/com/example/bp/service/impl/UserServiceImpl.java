@@ -6,12 +6,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.example.bp.common.constant.BpResponse;
 import com.example.bp.common.constant.ServerResponse;
 import com.example.bp.common.exception.ServerException;
 import com.example.bp.mapper.UserMapper;
@@ -37,7 +40,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
   @Override
   public UserDTO save(UserDTO model) throws Exception {
-    log.info("Saving new User: {} ", model.getUserName());
+    log.info("Saving new User: {} ", model.getUsername());
     User user = userMapper.toEntity(model);
     user.setPassword(passwordEncoder.encode(model.getPassword()));
     
@@ -57,8 +60,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     if (user != null) {
       return userMapper.toDto(user);
     }
-
-    throw new ServerException(ServerResponse.NO_RECORD_FOUND);
+    throw new ServerException(ServerResponse.USER_NOT_FOUND, id);
 
   }
 
@@ -74,7 +76,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     User user = userRepository.findFirstByUsername(username);
     if(user == null) {
       log.error("No User by username : {}", username);
-      throw new ServerException(ServerResponse.NO_RECORD_FOUND);
+      throw new ServerException(ServerResponse.USER_NOT_FOUND, username );
     }
     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
     user.getAssignedUserRoles().forEach(role  -> {
@@ -95,8 +97,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     if (user != null) {
       return userMapper.toDto(user);
     }
-
-    throw new ServerException(ServerResponse.NO_RECORD_FOUND);
+    throw new ServerException(ServerResponse.USER_NOT_FOUND, username );
   }
   
 }
