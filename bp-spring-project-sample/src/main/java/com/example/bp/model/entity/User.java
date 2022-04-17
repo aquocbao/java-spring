@@ -32,7 +32,7 @@ public class User extends AbstractEntity implements Serializable {
   private Long userId;
 
   @Column(name = "USER_NAME", length = 20, nullable = false)
-  private String userName;
+  private String username;
 
   @Column(name = "PASS_WORD", length = 4000, nullable = false)
   private String password;

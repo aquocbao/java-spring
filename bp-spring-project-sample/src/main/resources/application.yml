@@ -18,13 +18,13 @@ security:
       jwt:
         keyValue: |
           -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmLaMuIVz46ok3XByOYLY
-          UYttDXMmi/74taY/XQfL+vlb4P3aGCoCbDJFNeM4XBNZXcSBfsaH1xsa+M9Hx05U
-          NeNj11cv7wK8BKVNA+l9DyIjjW0IcXlKjtzv/qXZjPE98igWvyc84LzkILQYwIwX
-          G6gAdS6CMnzvYomrt0VjyRquUT2mawJfs60HQkwsj4t0JrWjVufVA1BErLpgdhR8
-          IlM5n9IrgjN8JAt8PpdBttOKDGq/g/UzzLNYi0TyLYooOd/MZeXyjdN7tj5Vwt3m
-          vG70+b99Q6FxGFIFQ5NKavr8/eLBO69E9P6Qzzg0mD/nOP82NRtDVmb5B1j0idJb
-          AwIDAQAB
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi8SJ8YtchHHSYNHEQdEk
+          /Oq1PfrPVwlRvOWGcxsFMbSC5XjRS1yi11cL3M/k14wDerHecBR5/P004lVRCTEQ
+          /Ud5DJvr2Orm8FQyHOI1QysgYkFGLzXUDztUS7ihYTy0azmhRzDJ+rXLEvakPiNS
+          HBpUGLTlXweT5pL0cDeR3rbuGglkmbJxWoVsEoy7TrbAPkPDeE6dfk0Q0NKj9XaS
+          E+wHYOJSRKxwbCG4Snr0bjSiO/vsS4udkeUK0zxK6TrucRnq4D+ROjtAFsaOhiYr
+          eo/OOUR1a7MNlNFWHTxh6lnJOxKscwWf4zmkclWPw6c7k/z3VHRlSf5E+C2z5fmi
+          XQIDAQAB
           -----END PUBLIC KEY-----
 ---
 spring:
