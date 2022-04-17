@@ -1,8 +1,6 @@
 package com.example.bp.model.dto;
 
 import java.io.Serializable;
-import com.example.bp.model.entity.User;
-import com.example.bp.model.entity.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +18,5 @@ public class AssignedUserRoleDTO extends AbstractDTO implements Serializable {
 
   private Long isActive;
 
-  private User user;
-
-  private UserRole userRole;
+  private UserRoleDTO userRole;
 }

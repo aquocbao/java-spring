@@ -1,5 +1,6 @@
 package com.example.bp.service.impl;
 
+import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.example.bp.model.dto.AssignedUserRoleDTO;
@@ -31,6 +32,12 @@ public class AssignedUserRoleServiceImpl implements AssignedUserRoleService {
 
   @Override
   public Long deleteById(Long id) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List<AssignedUserRoleDTO> findAll() {
     // TODO Auto-generated method stub
     return null;
   }

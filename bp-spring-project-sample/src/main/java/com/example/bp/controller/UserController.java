@@ -1,6 +1,6 @@
 package com.example.bp.controller;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,29 +11,40 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.bp.model.dto.UserDTO;
 import com.example.bp.service.UserService;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import io.swagger.models.Response;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/users")
 public class UserController {
-  
+
   @Autowired
   UserService userService;
-  
+
   @ApiOperation(value = "get user by id", notes = "get employee by id")
-  @ApiResponses(value = { @ApiResponse(code = 401, response = Response.class, message = "INVALID_TOKEN") })
+  @ApiResponses(
+      value = {@ApiResponse(code = 401, response = Response.class, message = "INVALID_TOKEN")})
+  @GetMapping()
+  public ResponseEntity<List<UserDTO>> getUsers() {
+    return ResponseEntity.ok().body(userService.findAll());
+  }
+
+  @ApiOperation(value = "get user by id", notes = "get employee by id")
+  @ApiResponses(
+      value = {@ApiResponse(code = 401, response = Response.class, message = "INVALID_TOKEN")})
   @GetMapping("/{id}")
   public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-      UserDTO user = null;
-      try {
-          user = userService.findById(id);
-      } catch (Exception e) {
-          e.printStackTrace();
-          return new ResponseEntity<UserDTO>(HttpStatus.NOT_FOUND);
-      }
-      return new ResponseEntity<UserDTO>(user, HttpStatus.OK);
+    UserDTO user = null;
+    try {
+      user = userService.findById(id);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return new ResponseEntity<UserDTO>(HttpStatus.NOT_FOUND);
+    }
+    return new ResponseEntity<UserDTO>(user, HttpStatus.OK);
   }
+
+
 
 }
