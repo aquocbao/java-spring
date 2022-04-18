@@ -10,7 +10,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -20,7 +20,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 public class BpSpringProjectSampleApplication extends SpringBootServletInitializer
     implements WebApplicationInitializer {
 
-  @RequestMapping("/user")
+  @GetMapping("/user")
   public Principal user(Principal user) {
     return user;
   }
@@ -35,7 +35,7 @@ public class BpSpringProjectSampleApplication extends SpringBootServletInitializ
     localeResolver.setDefaultLocale(Locale.ENGLISH);
     return localeResolver;
   }
-  
+
   @Bean
   public ResourceBundleMessageSource bundleMessageSource() {
     ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

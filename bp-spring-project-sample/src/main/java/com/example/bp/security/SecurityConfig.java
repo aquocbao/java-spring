@@ -29,6 +29,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private final UserDetailsService userDetailsService;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+  private static final String[] AUTH_WHITELIST = {
+      // -- Swagger UI v2
+      "/v2/api-docs",
+      "/swagger-resources",
+      "/swagger-resources/**",
+      "/configuration/ui",
+      "/configuration/security",
+      "/swagger-ui.html",
+      "/webjars/**",
+      // other public end points of your API may be appended to this array
+      "/login/**",
+      "/token/refresh/**",
+      "/h2-console/**"
+};
+  
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
@@ -41,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 //    http.authorizeHttpRequests().anyRequest().permitAll();
-    http.authorizeHttpRequests().antMatchers("/login/**", "/token/refresh/**", "/h2-console/**")
+    http.authorizeHttpRequests().antMatchers(AUTH_WHITELIST)
         .permitAll();
     http.authorizeHttpRequests().antMatchers("/users/**").hasAnyRole("ADMIN", "USER");
     http.authorizeHttpRequests().anyRequest().authenticated();
@@ -52,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/h2-console/**");
+    web.ignoring().antMatchers("/h2-console/**", "/swagger-ui/**" );
   }
 
   @Bean

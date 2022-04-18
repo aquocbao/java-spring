@@ -14,6 +14,10 @@ public class UserDTO extends AbstractDTO implements Serializable {
    */
   private static final long serialVersionUID = -1272164913553696913L;
 
+  private Long id;
+  
+  private Long userId;
+  
   private String username;
 
   private String password;
@@ -22,6 +26,6 @@ public class UserDTO extends AbstractDTO implements Serializable {
 
   private String lastName;
 
-  List<AssignedUserRoleDTO> assignedUserRoles;
+  private List<AssignedUserRoleDTO> assignedUserRoles;
 
 }

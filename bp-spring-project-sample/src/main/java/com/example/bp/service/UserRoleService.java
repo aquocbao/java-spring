@@ -1,7 +1,7 @@
 package com.example.bp.service;
 
-import com.example.bp.model.dto.UserDTO;
+import com.example.bp.model.dto.UserRoleDTO;
 
-public interface UserRoleService extends IService<UserDTO>  {
+public interface UserRoleService extends IService<UserRoleDTO> {
 
 }

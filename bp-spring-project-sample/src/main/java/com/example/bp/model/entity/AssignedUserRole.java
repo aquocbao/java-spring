@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AssignedUserRole extends AbstractEntity implements Serializable {
-  
+
   /**
    * 
    */
@@ -30,7 +31,7 @@ public class AssignedUserRole extends AbstractEntity implements Serializable {
 
 
   @Column(name = "ASSIGNED_USER_ROLE_ID", precision = 22, scale = 0)
-  private long assignedUserRoleId;
+  private Long assignedUserRoleId;
 
   @Column(name = "IS_ACTIVE")
   private Long isActive;

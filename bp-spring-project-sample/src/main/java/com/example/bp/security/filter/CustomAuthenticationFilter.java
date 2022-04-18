@@ -49,12 +49,12 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     User user = (User) authentication.getPrincipal();
     Algorithm algorithm = Algorithm.HMAC256("bpSecret".getBytes());
     String accessToken = JWT.create().withSubject(user.getUsername())
-        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000)) // 10 minutes
+        .withExpiresAt(new Date(System.currentTimeMillis() + 120 * 60 * 1000)) // 2 hours
         .withIssuer(request.getRequestURI().toString()).withClaim("roles", user.getAuthorities()
             .stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
         .sign(algorithm);
     String refreshToken = JWT.create().withSubject(user.getUsername())
-        .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000)) // 30 minutes
+        .withExpiresAt(new Date(System.currentTimeMillis() + 300 * 60 * 1000)) // 5 hours
         .withIssuer(request.getRequestURI().toString()).sign(algorithm);
 
     Map<String, String> tokens = new HashMap<>();

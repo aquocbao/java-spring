@@ -8,5 +8,7 @@ import com.example.bp.model.entity.UserRole;
 @Repository
 public interface UserRoleRepository
     extends JpaRepository<UserRole, Long>, JpaSpecificationExecutor<UserRole> {
+  
+  UserRole findFirstByUserRoleId(Long userRoleId);
 
 }
