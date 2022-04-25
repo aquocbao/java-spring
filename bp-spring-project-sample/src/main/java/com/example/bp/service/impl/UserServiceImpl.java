@@ -22,8 +22,10 @@ import com.example.bp.common.util.CommonUtil;
 import com.example.bp.mapper.UserMapper;
 import com.example.bp.model.dto.AssignedUserRoleDTO;
 import com.example.bp.model.dto.UserDTO;
+import com.example.bp.model.dto.UserRoleDTO;
 import com.example.bp.model.entity.AssignedUserRole;
 import com.example.bp.model.entity.User;
+import com.example.bp.model.entity.UserRole;
 import com.example.bp.model.search.UserSearchCriteria;
 import com.example.bp.model.search.UserSpecification;
 import com.example.bp.repository.UserRepository;
@@ -51,7 +53,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   AssignedUserRoleService assignedUserRoleService;
   
   @Autowired
-  UserRoleRepository userRoleRepository;
+  UserRoleService userRoleService;
 
   @Override
   public UserDTO save(UserDTO model) throws Exception {
@@ -62,22 +64,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     entity.setUserId(CommonUtil.generateID());
     // encode password
     entity.setPassword(passwordEncoder.encode(model.getPassword()));
-    User user = userRepository.saveAndFlush(entity);
+    entity.setAssignedUserRoles(null);
+    UserDTO user = userMapper.toDto(userRepository.saveAndFlush(entity));
     // handle create assign user role
-    if(!ObjectUtils.isEmpty(entity.getAssignedUserRoles())) {
-      entity.getAssignedUserRoles().stream().forEach(assignedUserRole -> {
+    if(!ObjectUtils.isEmpty(model.getAssignedUserRoles())) {
+      model.getAssignedUserRoles().stream().forEach(assignedUserRole -> {
         assignedUserRole.setUser(user);
         assignedUserRole.setAssignedUserRoleId(CommonUtil.generateID());
         try {
-          assignedUserRole.setUserRole(userRoleRepository.findById(assignedUserRole.getUserRole().getUserRoleId()).orElse(null));
+          UserRoleDTO role = userRoleService.findById(assignedUserRole.getUserRole().getUserRoleId());
+          assignedUserRole.setUserRole(role);
         } catch (Exception e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
         }
       });
+      
       assignedUserRoleService.saveAll(model.getAssignedUserRoles());
     }
-    return userMapper.toDto(user);
+    return user;
   }
 
   @Override

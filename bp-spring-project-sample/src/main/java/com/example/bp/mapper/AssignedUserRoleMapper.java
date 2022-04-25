@@ -11,6 +11,7 @@ import com.example.bp.model.entity.AssignedUserRole;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AssignedUserRoleMapper {
   
+  @Mapping(target = "user", ignore = true)
   AssignedUserRoleDTO toDto(AssignedUserRole entity);
 
   AssignedUserRole toEntity(AssignedUserRoleDTO dto);

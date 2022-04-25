@@ -37,6 +37,7 @@ public class AssignedUserRole extends AbstractEntity implements Serializable {
   private Long isActive;
 
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
   private User user;
 

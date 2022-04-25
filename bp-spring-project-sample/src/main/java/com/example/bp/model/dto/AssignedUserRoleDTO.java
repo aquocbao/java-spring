@@ -1,7 +1,6 @@
 package com.example.bp.model.dto;
 
 import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,5 +20,7 @@ public class AssignedUserRoleDTO extends AbstractDTO implements Serializable {
   private Long isActive;
 
   private UserRoleDTO userRole;
+
+  private UserDTO user;
 
 }

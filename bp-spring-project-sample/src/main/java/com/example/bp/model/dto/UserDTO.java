@@ -3,10 +3,12 @@ package com.example.bp.model.dto;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserDTO extends AbstractDTO implements Serializable {
 
   /**
