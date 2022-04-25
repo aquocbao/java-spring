@@ -11,30 +11,41 @@ server:
   port: 7001
   servlet:
     contextPath:
-security:
-  sessions: STATELESS
-  oauth2:
-    resource:
-      jwt:
-        keyValue: |
-          -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi8SJ8YtchHHSYNHEQdEk
-          /Oq1PfrPVwlRvOWGcxsFMbSC5XjRS1yi11cL3M/k14wDerHecBR5/P004lVRCTEQ
-          /Ud5DJvr2Orm8FQyHOI1QysgYkFGLzXUDztUS7ihYTy0azmhRzDJ+rXLEvakPiNS
-          HBpUGLTlXweT5pL0cDeR3rbuGglkmbJxWoVsEoy7TrbAPkPDeE6dfk0Q0NKj9XaS
-          E+wHYOJSRKxwbCG4Snr0bjSiO/vsS4udkeUK0zxK6TrucRnq4D+ROjtAFsaOhiYr
-          eo/OOUR1a7MNlNFWHTxh6lnJOxKscwWf4zmkclWPw6c7k/z3VHRlSf5E+C2z5fmi
-          XQIDAQAB
-          -----END PUBLIC KEY-----
 ---
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: true
+        web-allow-others: false
   profiles: unittest
-security:
-  basic:
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: 
+    driverClassName: org.h2.Driver
+  sql:
+    init:
+      platform: h2
+      
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  jta:
     enabled: false
+debug: true
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
 ---
 spring:
   profiles: local
+ 
 #security:
 #  user:
 #    name: admin

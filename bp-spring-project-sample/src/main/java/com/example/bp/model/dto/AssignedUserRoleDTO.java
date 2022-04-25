@@ -13,10 +13,14 @@ public class AssignedUserRoleDTO extends AbstractDTO implements Serializable {
    */
   private static final long serialVersionUID = -3772312184925870036L;
 
+  private long Id;
 
-  private long assignedUserRoleId;
+  private Long assignedUserRoleId;
 
   private Long isActive;
 
   private UserRoleDTO userRole;
+
+  private UserDTO user;
+
 }
